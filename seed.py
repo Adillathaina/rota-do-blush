@@ -4,9 +4,9 @@ from models import (Avaliacao, Agendamento, Categoria, Cliente, Endereco,
                     ItemServico, Maquiadora, Servico, db)
 
 CATEGORIAS = [
-    ("Maquiagem Social", "pincel"),
-    ("Noivas", "coracao"),
-    ("Artística", "paleta"),
+    ("Maquiagem Social", "brilho"),
+    ("Noivas", "aliancas"),
+    ("Artística", "pincel"),
     ("Formaturas", "capelo"),
 ]
 

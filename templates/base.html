@@ -1,0 +1,66 @@
+{% from "icones.html" import icone %}
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  
+<meta charset="utf-8">
+  
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  
+<title>{% block titulo %}{% endblock %} · Rota do Blush</title>
+  
+<link rel="preconnect" href="https://fonts.googleapis.com">
+  
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+<link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+</head>
+<body>
+  
+<div class="app">
+    
+<main class="conteudo">
+      
+{% block conteudo %}{% endblock %}
+    
+</main>
+    
+<nav class="barra" aria-label="Navegação principal">
+      
+<a class="barra__item {% if aba == 'inicio' %}barra__item--ativo{% endif %}"
+         
+href="{{ url_for('paginas.home') }}">
+        
+{{ icone("casa") }}
+        
+<span>Início</span>
+      
+</a>
+      
+<a class="barra__item {% if aba == 'agendamentos' %}barra__item--ativo{% endif %}"
+         
+href="#">
+        
+{{ icone("calendario") }}
+        
+<span>Meus Agendamentos</span>
+      
+</a>
+      
+<a class="barra__item {% if aba == 'perfil' %}barra__item--ativo{% endif %}"
+         
+href="#">
+        
+{{ icone("usuario") }}
+        
+<span>Perfil</span>
+      
+</a>
+    
+</nav>
+  
+</div>
+</body>
+</html>

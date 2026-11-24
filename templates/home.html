@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% from "icones.html" import icone %}
+{% block titulo %}Início{% endblock %}
+{% block conteudo %}
+<header class="topo">
+  
+<img class="topo__logo" src="{{ url_for('static', filename='img/logo.png') }}"
+       
+alt="Rota do Blush - Maquiagem Home Care">
+  
+<span class="avatar">{{ icone("usuario") }}</span>
+</header>
+<h1 class="titulo">Olá, pronta para brilhar hoje?</h1>
+<p class="subtitulo">Escolha sua make e a gente vai até você.</p>
+<form class="busca" action="/busca" role="search">
+  
+{{ icone("busca", 20) }}
+  
+<input type="search" name="q" placeholder="Buscar serviços de maquiagem"
+         
+aria-label="Buscar serviços de maquiagem">
+</form>
+<h2 class="secao__titulo">Categorias</h2>
+<div class="categorias">
+  
+{% for categoria in categorias %}
+  
+<a class="categoria" href="{{ url_for('paginas.listagem', categoria_id=categoria.id) }}">
+    
+<span class="categoria__icone">{{ icone(categoria.icone) }}</span>
+    
+{{ categoria.nome }}
+  
+</a>
+  
+{% endfor %}
+</div>
+<div class="banner">
+  
+<strong>Leve o salão para sua casa</strong>
+  
+<span>Atendimento em Araguaína e região</span>
+</div>
+{% endblock %}

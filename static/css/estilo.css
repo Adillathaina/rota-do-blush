@@ -1,0 +1,119 @@
+:root {
+  --preto: #111111;
+  --bege: #F7EBDD;
+  --branco: #FFFFFF;
+  --dourado: #B8924A;
+  --nude: #E8C9AE;
+  --cinza: #4A4A4A;
+  --cinza-claro: #9A9A9A;
+  --borda: #EEE6DC;
+  --raio: 16px;
+  --altura-barra: 72px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Inter", Arial, sans-serif;
+  color: var(--preto);
+  background: #F2F2F2;
+}
+
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+
+.app {
+  max-width: 430px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background: var(--branco);
+}
+
+.conteudo { padding: 24px 20px calc(var(--altura-barra) + 24px); }
+
+/* Títulos */
+.titulo { font-size: 1.6rem; font-weight: 700; line-height: 1.2; }
+.subtitulo { color: var(--cinza); font-size: .95rem; margin-top: 6px; }
+.secao__titulo { font-size: 1.15rem; font-weight: 700; margin-bottom: 14px; }
+.preco { color: var(--dourado); font-weight: 700; }
+
+/* Home */
+.topo { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.topo__logo { width: 110px; }
+.avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--bege); color: var(--cinza);
+  display: grid; place-items: center;
+}
+
+.busca {
+  display: flex; align-items: center; gap: 10px;
+  height: 52px; padding: 0 18px; margin: 24px 0 28px;
+  background: var(--bege); border-radius: 999px; color: var(--cinza);
+}
+.busca input {
+  flex: 1; min-width: 0; width: 100%;
+  border: none; background: transparent; outline: none;
+  font: inherit; color: var(--preto);
+}
+.busca input::placeholder { color: var(--cinza); }
+
+.categorias { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.categoria {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 12px; min-height: 112px; padding: 20px 12px;
+  background: var(--bege); border-radius: var(--raio);
+  font-size: .95rem; font-weight: 500; text-align: center;
+}
+.categoria__icone {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--branco); display: grid; place-items: center;
+}
+
+.banner {
+  margin-top: 20px; padding: 20px;
+  background: var(--preto); color: var(--branco); border-radius: var(--raio);
+}
+.banner strong { display: block; font-size: 1.1rem; margin-bottom: 4px; }
+.banner span { font-size: .85rem; opacity: .85; }
+
+/* Cabeçalho com botão de voltar */
+.cabecalho { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+.cabecalho .titulo { font-size: 1.35rem; }
+.cabecalho .subtitulo { margin-top: 2px; font-size: .85rem; }
+.voltar {
+  flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%;
+  background: var(--bege); display: grid; place-items: center;
+}
+
+/* Listagem */
+.lista { display: flex; flex-direction: column; gap: 14px; }
+.cartao {
+  display: flex; align-items: center; gap: 14px; padding: 12px;
+  background: var(--branco); border: 1px solid var(--borda); border-radius: var(--raio);
+  box-shadow: 0 2px 8px rgba(17, 17, 17, .06);
+}
+.cartao__foto { flex-shrink: 0; width: 80px; height: 80px; border-radius: 12px; object-fit: cover; }
+.cartao__info { flex: 1; min-width: 0; }
+.cartao__nome { font-weight: 600; }
+.cartao__duracao { color: var(--cinza); font-size: .82rem; }
+.seta {
+  flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%;
+  background: var(--preto); color: var(--branco); display: grid; place-items: center;
+}
+.vazio { padding: 40px 0; color: var(--cinza); text-align: center; }
+.legenda { margin-top: 16px; color: var(--cinza-claro); font-size: .75rem; text-align: center; }
+
+/* Barra de navegação inferior */
+.barra {
+  position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 100%; max-width: 430px; height: var(--altura-barra);
+  display: flex; justify-content: space-around; align-items: center;
+  background: var(--branco); border-top: 1px solid var(--borda);
+}
+.barra__item {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  min-width: 72px; padding: 8px 0;
+  color: var(--cinza-claro); font-size: .72rem;
+}
+.barra__item--ativo { color: var(--preto); font-weight: 700; }
