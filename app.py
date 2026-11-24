@@ -3,9 +3,9 @@ import os
 from dotenv import load_dotenv
 from flask import Flask
 from flask_migrate import Migrate
-from sqlalchemy import text
 
 from models import db
+from routes.servicos import bp as servicos_bp
 
 PASTA_DO_PROJETO = os.path.abspath(os.path.dirname(__file__))
 load_dotenv(os.path.join(PASTA_DO_PROJETO, ".env"))
@@ -42,15 +42,14 @@ def create_app(config=None):
 
     db.init_app(app)
     migrate.init_app(app, db)
+    app.register_blueprint(servicos_bp)
+    app.json.ensure_ascii = False
+    app.json.sort_keys = False
+
 
     @app.route("/")
     def inicio():
         return "Olá, Rota do Blush!"
-
-    @app.route("/teste-banco")
-    def teste_banco():
-        db.session.execute(text("SELECT 1"))
-        return "Banco conectado: " + db.engine.dialect.name
 
     return app
 
