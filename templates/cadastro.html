@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block titulo %}Criar conta{% endblock %}
+{% block barra %}{% endblock %}
+
+{% block conteudo %}
+<div class="acesso">
+  <img class="acesso__logo" src="{{ url_for('static', filename='img/logo.png') }}"
+       alt="Rota do Blush – Maquiagem Home Care">
+  <h1 class="titulo">Criar conta</h1>
+  <p class="subtitulo">Cadastre-se para agendar sua make em casa.</p>
+
+  <form class="formulario" method="post">
+    <label class="campo">
+      <span>Nome</span>
+      <input type="text" name="nome" value="{{ dados.get('nome', '') }}" autocomplete="name" minlength="3" required>
+    </label>
+    <label class="campo">
+      <span>Telefone (WhatsApp)</span>
+      <input type="tel" name="telefone" value="{{ dados.get('telefone', '') }}" placeholder="(63) 99999-0000" autocomplete="tel" required>
+    </label>
+    <label class="campo">
+      <span>Email</span>
+      <input type="email" name="email" value="{{ dados.get('email', '') }}" autocomplete="email" required>
+    </label>
+    <label class="campo">
+      <span>Senha</span>
+      <input type="password" name="senha" autocomplete="new-password" minlength="6" required>
+    </label>
+    <button class="botao" type="submit">Criar conta</button>
+  </form>
+
+  <p class="acesso__link">Já tem conta?
+    <a href="{{ url_for('auth.login') }}">Já tenho conta</a></p>
+</div>
+{% endblock %}

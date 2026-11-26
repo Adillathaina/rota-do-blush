@@ -22,12 +22,17 @@
 <div class="app">
     
 <main class="conteudo">
+{% with mensagens = get_flashed_messages(with_categories=true) %}
+  {% for categoria, mensagem in mensagens %}
+    <p class="aviso aviso--{{ categoria }}">{{ mensagem }}</p>
+  {% endfor %}
+{% endwith %}
       
 {% block conteudo %}{% endblock %}
     
 </main>
     
-<nav class="barra" aria-label="Navegação principal">
+{% block barra %}<nav class="barra" aria-label="Navegação principal">
       
 <a class="barra__item {% if aba == 'inicio' %}barra__item--ativo{% endif %}"
          
@@ -59,7 +64,7 @@ href="#">
       
 </a>
     
-</nav>
+</nav>{% endblock %}
   
 </div>
 </body>

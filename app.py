@@ -7,6 +7,7 @@ from flask_migrate import Migrate
 from models import db
 from routes.servicos import bp as servicos_bp
 from routes.paginas import bp as paginas_bp
+from routes.auth import bp as auth_bp
 
 PASTA_DO_PROJETO = os.path.abspath(os.path.dirname(__file__))
 load_dotenv(os.path.join(PASTA_DO_PROJETO, ".env"))
@@ -45,6 +46,7 @@ def create_app(config=None):
     migrate.init_app(app, db)
     app.register_blueprint(servicos_bp)
     app.register_blueprint(paginas_bp)
+    app.register_blueprint(auth_bp)
     app.json.ensure_ascii = False
     app.json.sort_keys = False
 
