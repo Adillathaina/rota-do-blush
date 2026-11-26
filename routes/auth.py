@@ -95,3 +95,6 @@ def logout():
     session.clear()
     return redirect(url_for("auth.login"))
 
+@bp.app_context_processor
+def dados_da_cliente():
+    return {"cliente": cliente_logada()}

@@ -20,6 +20,13 @@ class Cliente(db.Model):
 
     def conferir_senha(self, senha):
         return check_password_hash(self.senha_hash or "", senha)
+    
+    @property
+    def iniciais(self):
+        partes = self.nome.split()
+        primeira = partes[0][0]
+        ultima = partes[-1][0] if len(partes) > 1 else ""
+        return (primeira + ultima).upper()
 
 class Endereco(db.Model):
     __tablename__ = "enderecos"
