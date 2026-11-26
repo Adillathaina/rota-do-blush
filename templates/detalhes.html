@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% from "icones.html" import icone, estrelas %}
+{% block titulo %}{{ servico.nome }}{% endblock %}
+{% block barra %}{% endblock %}
+
+{% block conteudo %}
+<div class="detalhe__topo">
+  <img class="detalhe__foto" src="{{ url_for('static', filename=servico.imagem) }}"
+       alt="Foto ilustrativa da {{ servico.nome }}">
+  <a class="voltar voltar--sobre-foto" aria-label="Voltar"
+     href="{{ url_for('paginas.listagem', categoria_id=servico.categoria_id) }}">{{ icone("voltar") }}</a>
+</div>
+
+<h1 class="titulo">{{ servico.nome }}</h1>
+{% if media %}
+<p class="avaliacao">
+  {{ estrelas(media) }}
+  <span>{{ "%.1f"|format(media)|replace(".", ",") }} ({{ total }} avaliações)</span>
+</p>
+{% endif %}
+<p class="detalhe__preco">
+  <span class="preco">R$ {{ servico.preco|int }}</span> · {{ servico.duracao_minutos|duracao }} de atendimento
+</p>
+
+<h2 class="secao__titulo">O que está incluso</h2>
+<ul class="inclusos">
+  {% for item in servico.itens %}
+  <li>{{ icone("check", 18) }} {{ item.descricao }}</li>
+  {% endfor %}
+</ul>
+<p class="legenda">Imagem ilustrativa gerada por IA.</p>
+
+<div class="rodape-fixo">
+  <a class="botao" href="/agendar/{{ servico.id }}">Agendar este serviço</a>
+</div>
+{% endblock %}

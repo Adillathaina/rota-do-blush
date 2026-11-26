@@ -15,6 +15,10 @@ def servico_resumo(servico):
         "imagem": servico.imagem,
         "categoria_id": servico.categoria_id,
     }
+def media_avaliacoes(servico_id):
+    media, total = (db.session.query(func.avg(Avaliacao.nota), func.count(Avaliacao.id))
+                    .filter(Avaliacao.servico_id == servico_id).one())
+    return (round(float(media), 1) if media else None), total
 
 
 @bp.get("/categorias")
@@ -41,11 +45,10 @@ def buscar_servicos():
 @bp.get("/servicos/<int:servico_id>")
 def detalhes_servico(servico_id):
     servico = db.get_or_404(Servico, servico_id)
-    media, total = (db.session.query(func.avg(Avaliacao.nota), func.count(Avaliacao.id))
-                    .filter(Avaliacao.servico_id == servico.id).one())
+    media, total = media_avaliacoes(servico.id)
     dados = servico_resumo(servico)
     dados["descricao"] = servico.descricao
     dados["itens"] = [item.descricao for item in servico.itens]
-    dados["avaliacao_media"] = round(float(media), 1) if media else None
+    dados["avaliacao_media"] = media
     dados["total_avaliacoes"] = total
     return jsonify(dados)
