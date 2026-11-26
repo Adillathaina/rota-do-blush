@@ -1,4 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
+
 
 db = SQLAlchemy()
 
@@ -9,10 +11,15 @@ class Cliente(db.Model):
     nome = db.Column(db.String(100), nullable=False)
     telefone = db.Column(db.String(11), nullable=False)
     email = db.Column(db.String(120), nullable=False, unique=True)
+    senha_hash = db.Column(db.String(256), nullable=True)
     criado_em = db.Column(db.DateTime, nullable=False, server_default=db.func.now())
 
     enderecos = db.relationship("Endereco", backref="cliente", cascade="all, delete-orphan")
+    def definir_senha(self, senha):
+        self.senha_hash = generate_password_hash(senha)
 
+    def conferir_senha(self, senha):
+        return check_password_hash(self.senha_hash or "", senha)
 
 class Endereco(db.Model):
     __tablename__ = "enderecos"
