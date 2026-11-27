@@ -37,6 +37,7 @@ class Endereco(db.Model):
     numero = db.Column(db.String(10), nullable=False)
     bairro = db.Column(db.String(100), nullable=False)
     cidade = db.Column(db.String(100), nullable=False, default="Araguaína")
+    cep = db.Column(db.String(8))
 
 
 class Maquiadora(db.Model):
