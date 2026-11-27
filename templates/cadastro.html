@@ -26,6 +26,35 @@
       <span>Senha</span>
       <input type="password" name="senha" autocomplete="new-password" minlength="6" required>
     </label>
+        <h2 class="secao__titulo formulario__secao">Endereço do atendimento</h2>
+    <label class="campo">
+      <span>CEP</span>
+      <input type="text" name="cep" id="cep" value="{{ dados.get('cep', '') }}"
+             placeholder="77800-000" inputmode="numeric" maxlength="9"
+             autocomplete="postal-code" required>
+      <small class="campo__ajuda" id="cep-status" aria-live="polite">Atendemos Araguaína e região (TO).</small>
+    </label>
+    <label class="campo">
+      <span>Rua</span>
+      <input type="text" name="rua" id="rua" value="{{ dados.get('rua', '') }}"
+             autocomplete="address-line1" required>
+    </label>
+    <div class="campos-lado">
+      <label class="campo">
+        <span>Número</span>
+        <input type="text" name="numero" id="numero" value="{{ dados.get('numero', '') }}"
+               maxlength="10" required>
+      </label>
+      <label class="campo">
+        <span>Bairro</span>
+        <input type="text" name="bairro" id="bairro" value="{{ dados.get('bairro', '') }}" required>
+      </label>
+    </div>
+    <label class="campo">
+      <span>Cidade</span>
+      <input type="text" name="cidade" id="cidade" value="{{ dados.get('cidade', '') }}"
+             autocomplete="address-level2" required>
+    </label>
     <button class="botao" type="submit">Criar conta</button>
   </form>
 

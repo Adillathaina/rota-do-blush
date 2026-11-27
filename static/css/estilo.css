@@ -132,6 +132,11 @@ a { color: inherit; text-decoration: none; }
 }
 .campo input:focus { outline: 2px solid var(--preto); outline-offset: 1px; }
 
+.campo__ajuda { color: var(--cinza); font-size: .78rem; font-weight: 400; }
+.campo__ajuda--erro { color: #9B1C1C; }
+.formulario__secao { margin: 10px 0 -4px; }
+.campos-lado { display: grid; grid-template-columns: 1fr 2fr; gap: 12px; }
+
 /* Botão principal */
 .botao {
   width: 100%; padding: 16px; border: 0; border-radius: 999px;
