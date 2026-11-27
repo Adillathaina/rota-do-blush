@@ -62,3 +62,6 @@
     <a href="{{ url_for('auth.login') }}">Já tenho conta</a></p>
 </div>
 {% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/cep.js') }}"></script>
+{% endblock %}
