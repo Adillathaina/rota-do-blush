@@ -31,10 +31,16 @@ def login_obrigatorio(funcao):
         return funcao(*args, **kwargs)
     return protegida
 
+def destino_seguro(proxima):
+    if proxima and proxima.startswith("/") and not proxima.startswith("//") and "\\" not in proxima:
+        return proxima
+    return url_for("paginas.home")
+
 @bp.route("/cadastro", methods=["GET", "POST"])
 def cadastro():
+    proxima = request.args.get("proxima", "")
     if request.method == "GET":
-        return render_template("cadastro.html", dados={})
+        return render_template("cadastro.html", dados={}, proxima=proxima)
 
     dados = request.form
     nome = dados.get("nome", "").strip()
@@ -68,7 +74,7 @@ def cadastro():
     if erros:
         for erro in erros:
             flash(erro, "erro")
-        return render_template("cadastro.html", dados=dados), 400
+        return render_template("cadastro.html", dados=dados, proxima=proxima), 400
 
     cliente = Cliente(nome=nome, telefone=telefone, email=email)
     cliente.definir_senha(senha)
@@ -79,7 +85,7 @@ def cadastro():
     session.clear()
     session["cliente_id"] = cliente.id
     flash("Conta criada! Bem-vinda à Rota do Blush.", "sucesso")
-    return redirect(url_for("paginas.home"))
+    return redirect(destino_seguro(proxima))
 
 @bp.route("/login", methods=["GET", "POST"])
 def login():
@@ -97,9 +103,7 @@ def login():
 
     session.clear()
     session["cliente_id"] = cliente.id
-    if not proxima.startswith("/") or proxima.startswith("//"):
-        proxima = url_for("paginas.home")
-    return redirect(proxima)
+    return redirect(destino_seguro(proxima))
 
 
 @bp.post("/logout")
