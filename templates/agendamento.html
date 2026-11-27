@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block titulo %}Agendar {{ servico.nome }}{% endblock %}
+{% block barra %}{% endblock %}
+
+{% block conteudo %}
+<h1 class="titulo">Agendar {{ servico.nome }}</h1>
+<p class="subtitulo">
+  {% if endereco %}{{ endereco.rua }}, {{ endereco.numero }} · {{ endereco.bairro }}, {{ endereco.cidade }}
+  {% else %}Nenhum endereço cadastrado{% endif %}
+</p>
+{% endblock %}
