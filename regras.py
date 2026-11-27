@@ -31,6 +31,8 @@ def maquiadora_livre(dia, horario, ignorar=None):
 
 
 def cliente_ocupada(cliente_id, dia, horario, ignorar=None):
+    if cliente_id is None:
+        return False
     consulta = Agendamento.query.filter_by(cliente_id=cliente_id, data=dia, horario=horario)
     if ignorar:
         consulta = consulta.filter(Agendamento.id != ignorar)

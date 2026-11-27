@@ -32,13 +32,14 @@ def agendamento_json(ag):
     }
 
 @bp.get("/horarios")
-@login_obrigatorio
 def horarios():
     dia = ler_data(request.args.get("data"))
     if dia is None or not data_valida(dia):
         return jsonify(erro="Data inválida."), 400
-    ignorar = request.args.get("ignorar", type=int)
-    return jsonify(horarios_do_dia(dia, cliente_logada().id, ignorar))
+    cliente = cliente_logada()
+    cliente_id = cliente.id if cliente else None
+    ignorar = request.args.get("ignorar", type=int) if cliente else None
+    return jsonify(horarios_do_dia(dia, cliente_id, ignorar))
 
 
 @bp.get("/agendamentos")
