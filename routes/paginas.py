@@ -9,31 +9,28 @@ bp = Blueprint("paginas", __name__)
 
 
 @bp.get("/")
-@login_obrigatorio
 def home():
     categorias = Categoria.query.order_by(Categoria.id).all()
     return render_template("home.html", categorias=categorias, aba="inicio")
 
 
 @bp.get("/categoria/<int:categoria_id>")
-@login_obrigatorio
 def listagem(categoria_id):
     categoria = db.get_or_404(Categoria, categoria_id)
     return render_template("listagem.html", titulo=categoria.nome,
                            servicos=categoria.servicos, aba="inicio")
 
 @bp.get("/servico/<int:servico_id>")
-@login_obrigatorio
 def detalhes(servico_id):
     servico = db.get_or_404(Servico, servico_id)
     media, total = media_avaliacoes(servico.id)
     return render_template("detalhes.html", servico=servico, media=media, total=total)
 
 @bp.get("/agendar/<int:servico_id>")
-@login_obrigatorio
 def agendamento(servico_id):
     servico = db.get_or_404(Servico, servico_id)
-    endereco = endereco_principal(cliente_logada().id)
+    cliente = cliente_logada()
+    endereco = endereco_principal(cliente.id) if cliente else None
     return render_template("agendamento.html", servico=servico, endereco=endereco)
 
 @bp.app_template_filter("duracao")
